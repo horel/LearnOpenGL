@@ -1,0 +1,29 @@
+name: Build Linux
+run-name: Build On Linux
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+          submodules: 'true'
+
+      - name: Install dependencies
+        run: |
+            sudo apt install libxrandr-dev
+            sudo apt install libxinerama-dev
+            sudo apt install libxcursor-dev
+            sudo apt install libxi-dev
+            sudo apt install libglvnd-dev
+        
+      - name: Build Config
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --config Release --target "install"

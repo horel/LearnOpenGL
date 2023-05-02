@@ -1,0 +1,63 @@
+{
+    "version": 5,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 19,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "BasePre",
+            "description": "Basic build using default generator",
+            "binaryDir": "${sourceDir}/build/",
+            "hidden": true
+        },
+        {
+            "name": "DebugPre",
+            "displayName": "Debug Config",
+            "inherits": [
+                "BasePre"
+            ],
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "ReleasePre",
+            "displayName": "Release Config",
+            "inherits": [
+                "BasePre"
+            ],
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "Base Build",
+            "hidden": true,
+            "jobs": 12,
+            "targets": "install"
+        },
+        {
+            "name": "Debug Build",
+            "inherits": ["Base Build"],
+            "configurePreset": "DebugPre",
+            "configuration": "Debug"
+        },
+        {
+            "name": "Release Build",
+            "inherits": ["Base Build"],
+            "configurePreset": "ReleasePre",
+            "configuration": "Release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "EmptyDefault",
+            "hidden": true,
+            "configurePreset": "DebugPre"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+# file
+
+_install/
+.cache
+build/
+
+clean_windows.bat
+build_windows.bat
+clangd_windows.bat

@@ -1,0 +1,3 @@
+project(CTest VERSION 0.0.1 LANGUAGES CXX)
+
+message(STATUS "[__WARN__] NO TESTS NOW!")
