@@ -2,6 +2,7 @@
 
 _install/
 .cache
+.vscode
 build/
 
 clean_windows.bat

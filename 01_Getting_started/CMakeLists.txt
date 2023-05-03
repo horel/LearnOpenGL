@@ -24,3 +24,9 @@ install(TARGETS 01_Getting_started
         ARCHIVE DESTINATION lib
         RUNTIME DESTINATION bin
 )
+
+file(GLOB assets_01_Getting_started assets/*)
+install(FILES ${assets_01_Getting_started}
+    CONFIGURATIONS Release Debug
+        DESTINATION assets/01_Getting_started/
+)
