@@ -20,13 +20,31 @@ PRIVATE
 # ---- executable install ----
 install(TARGETS 01_Getting_started
     CONFIGURATIONS Release Debug
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
-        RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+    RUNTIME DESTINATION bin
 )
 
 file(GLOB assets_01_Getting_started assets/*)
 install(FILES ${assets_01_Getting_started}
     CONFIGURATIONS Release Debug
-        DESTINATION assets/01_Getting_started/
+    DESTINATION assets/01_Getting_started/
+)
+
+
+
+# -------------------------------------------
+# The following is not used, 
+# it is simply to make it easier for me
+# to [Launch] on VSCode.
+# -------------------------------------------
+# MSVC
+install(FILES ${assets_01_Getting_started}
+    CONFIGURATIONS Release Debug
+    DESTINATION ${LEARN_GL_ROOT_DIR}/build/01_Getting_started/assets/01_Getting_started/
+)
+# Ninja / GCC / Clang
+install(FILES ${assets_01_Getting_started}
+    CONFIGURATIONS Release Debug
+    DESTINATION ${LEARN_GL_ROOT_DIR}/build/assets/01_Getting_started/
 )

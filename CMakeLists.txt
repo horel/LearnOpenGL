@@ -66,16 +66,16 @@ add_subdirectory(02_Lighting)
 # ---- library install ----
 install(TARGETS glad # only have glad.lib
     CONFIGURATIONS Release Debug
-        # LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib 
-        # RUNTIME DESTINATION bin
+    # LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib 
+    # RUNTIME DESTINATION bin
 )
 
 install(TARGETS glfw # only have glfw3.lib
     CONFIGURATIONS Release Debug
-        # LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib 
-        # RUNTIME DESTINATION bin
+    # LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib 
+    # RUNTIME DESTINATION bin
 )
 
 
