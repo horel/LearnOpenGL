@@ -1,4 +1,5 @@
 add_executable( 01_Getting_started
+    ${STB_SOURCES}
     src/shader.hpp
     src/main.cpp
 )
@@ -8,6 +9,7 @@ PRIVATE
     ${LEARN_GL_ROOT_DIR}/third_party/glad/include/
     ${LEARN_GL_ROOT_DIR}/third_party/glfw/include/
     ${LEARN_GL_ROOT_DIR}/third_party/glm/
+    ${LEARN_GL_ROOT_DIR}/third_party/stb_image/
 )
 
 target_link_libraries( 01_Getting_started
@@ -29,22 +31,4 @@ file(GLOB assets_01_Getting_started assets/*)
 install(FILES ${assets_01_Getting_started}
     CONFIGURATIONS Release Debug
     DESTINATION assets/01_Getting_started/
-)
-
-
-
-# -------------------------------------------
-# The following is not used, 
-# it is simply to make it easier for me
-# to [Launch] on VSCode.
-# -------------------------------------------
-# MSVC
-install(FILES ${assets_01_Getting_started}
-    CONFIGURATIONS Release Debug
-    DESTINATION ${LEARN_GL_ROOT_DIR}/build/01_Getting_started/assets/01_Getting_started/
-)
-# Ninja / GCC / Clang
-install(FILES ${assets_01_Getting_started}
-    CONFIGURATIONS Release Debug
-    DESTINATION ${LEARN_GL_ROOT_DIR}/build/assets/01_Getting_started/
 )

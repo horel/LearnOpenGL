@@ -29,15 +29,9 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 message(STATUS "[__INFO__] Build type : '${CMAKE_BUILD_TYPE}'")
 
-# ---- enable test ----
-option(ENABLE_TESTS "Enable CTests" OFF)
-if(ENABLE_TESTS)
-    add_subdirectory(tests)
-endif(ENABLE_TESTS)
-
 # ---- install dir setting ----
 set(LEARN_GL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-set(CMAKE_INSTALL_PREFIX "${LEARN_GL_ROOT_DIR}/_install/${CMAKE_BUILD_TYPE}")
+set(CMAKE_INSTALL_PREFIX "${LEARN_GL_ROOT_DIR}/_install")
 set(BINARY_ROOT_DIR "${CMAKE_INSTALL_PREFIX}/")
 
 # ---- find package ----
@@ -59,9 +53,15 @@ set(GLFW_INSTALL OFF CACHE BOOL "GLFW lib only" FORCE)
 # for third_party
 add_subdirectory(third_party/glfw) # only glfw3.lib
 add_subdirectory(third_party/glad)
+add_subdirectory(third_party/stb_image)
 # for each chapter
 add_subdirectory(01_Getting_started)
 add_subdirectory(02_Lighting)
+# for CTests
+option(ENABLE_TESTS "Enable CTests" ON)
+if(ENABLE_TESTS)
+    add_subdirectory(tests)
+endif(ENABLE_TESTS)
 
 # ---- library install ----
 install(TARGETS glad # only have glad.lib
