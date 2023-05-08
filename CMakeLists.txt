@@ -11,6 +11,7 @@ endif()
 message(STATUS "[__INFO__] CMAKE VERSION: ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}")
 message(STATUS "[__INFO__] Current Platform is: ${CMAKE_SYSTEM}")
 
+
 # ---- env setting ----
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -22,12 +23,14 @@ if(MSVC)
     # set(BUILD_SHARED_LIBS ON) # cmake default is off 
 endif(MSVC)
 
+
 # ---- Set a default build type if none was specified ----
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     message(STATUS "[__INFO__] Setting build type to '${CMAKE_BUILD_TYPE}' as none was specified.")
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
 endif()
 message(STATUS "[__INFO__] Build type : '${CMAKE_BUILD_TYPE}'")
+
 
 # ---- install dir setting ----
 set(LEARN_GL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -44,6 +47,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BINARY_ROOT_DIR}/build-int/)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${BINARY_ROOT_DIR}/build-int/)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${BINARY_ROOT_DIR}/build-int/)
 
+
 # ---- find package ----
 find_package(OpenGL REQUIRED)
 if(OpenGL_FOUND)
@@ -52,6 +56,7 @@ else()
     message (FATAL_ERROR "[__FIND__] Cannot find OpenGL")
 endif()
 # find_package(fmt CONFIG REQUIRED)
+
 
 # ---- Add subdir ----
 # for glfw3 library
@@ -72,6 +77,7 @@ option(ENABLE_TESTS "Enable CTests" OFF)
 if(ENABLE_TESTS)
     add_subdirectory(tests)
 endif(ENABLE_TESTS)
+
 
 # ---- library install ----
 install(TARGETS glad # only have glad.lib

@@ -1,4 +1,20 @@
 ---
-BasedOnStyle: LLVM
-IndentWidth: 4
+BasedOnStyle: Microsoft
 SortIncludes: false
+MaxEmptyLinesToKeep: 3
+
+BraceWrapping:
+  AfterClass: false
+  AfterControlStatement: false
+  AfterEnum: false
+  AfterFunction: false
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false

@@ -13,8 +13,7 @@ class Shader {
     unsigned int ID;
     // constructor generates the shader on the fly
     // ------------------------------------------------------------------------
-    Shader(const char *vertexPath, const char *fragmentPath,
-           const char *geometryPath = nullptr) {
+    Shader(const char *vertexPath, const char *fragmentPath, const char *geometryPath = nullptr) {
         // 1. retrieve the vertex/fragment source code from filePath
         std::string vertexCode;
         std::string fragmentCode;
@@ -49,8 +48,7 @@ class Shader {
                 geometryCode = gShaderStream.str();
             }
         } catch (std::ifstream::failure &e) {
-            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: "
-                      << e.what() << std::endl;
+            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
         }
         const char *vShaderCode = vertexCode.c_str();
         const char *fShaderCode = fragmentCode.c_str();
@@ -92,7 +90,9 @@ class Shader {
     }
     // activate the shader
     // ------------------------------------------------------------------------
-    void use() { glUseProgram(ID); }
+    void use() {
+        glUseProgram(ID);
+    }
     // utility uniform functions
     // ------------------------------------------------------------------------
     void setBool(const std::string &name, bool value) const {
@@ -129,18 +129,15 @@ class Shader {
     }
     // ------------------------------------------------------------------------
     void setMat2(const std::string &name, const glm::mat2 &mat) const {
-        glUniformMatrix2fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE,
-                           &mat[0][0]);
+        glUniformMatrix2fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
     // ------------------------------------------------------------------------
     void setMat3(const std::string &name, const glm::mat3 &mat) const {
-        glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE,
-                           &mat[0][0]);
+        glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
     // ------------------------------------------------------------------------
     void setMat4(const std::string &name, const glm::mat4 &mat) const {
-        glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE,
-                           &mat[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
 
   private:
@@ -153,24 +150,21 @@ class Shader {
             glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
             if (!success) {
                 glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-                std::cout
-                    << "ERROR::SHADER_COMPILATION_ERROR of type: " << type
-                    << "\n"
-                    << infoLog
-                    << "\n -- "
-                       "--------------------------------------------------- -- "
-                    << std::endl;
+                std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n"
+                          << infoLog
+                          << "\n -- "
+                             "--------------------------------------------------- -- "
+                          << std::endl;
             }
         } else {
             glGetProgramiv(shader, GL_LINK_STATUS, &success);
             if (!success) {
                 glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-                std::cout
-                    << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n"
-                    << infoLog
-                    << "\n -- "
-                       "--------------------------------------------------- -- "
-                    << std::endl;
+                std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n"
+                          << infoLog
+                          << "\n -- "
+                             "--------------------------------------------------- -- "
+                          << std::endl;
             }
         }
     }
