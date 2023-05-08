@@ -1,6 +1,11 @@
 @echo off
 pushd %~dp0\..\
 
+@REM ------------- clean project :
+rd /s /Q _install
+rd /s /Q build
+rd /s /Q .cache/build_clangd
+
 @REM ------------- if use Ninja(MSVC) : 
 @REM call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
 @REM cmake -S . -B .\build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
