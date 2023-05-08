@@ -1,3 +1,6 @@
+# glad - 4.3 - Core
+# https://glad.dav1d.de/
+
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set(GLAD_SOURCES "src/glad.c")
