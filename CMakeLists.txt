@@ -33,6 +33,16 @@ message(STATUS "[__INFO__] Build type : '${CMAKE_BUILD_TYPE}'")
 set(LEARN_GL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_INSTALL_PREFIX "${LEARN_GL_ROOT_DIR}/_install")
 set(BINARY_ROOT_DIR "${CMAKE_INSTALL_PREFIX}/")
+# ---- output dir setting ----
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BINARY_ROOT_DIR}/build-int/)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${BINARY_ROOT_DIR}/build-int/)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${BINARY_ROOT_DIR}/build-int/)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BINARY_ROOT_DIR}/build-int/)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${BINARY_ROOT_DIR}/build-int/)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${BINARY_ROOT_DIR}/build-int/)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BINARY_ROOT_DIR}/build-int/)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${BINARY_ROOT_DIR}/build-int/)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${BINARY_ROOT_DIR}/build-int/)
 
 # ---- find package ----
 find_package(OpenGL REQUIRED)
@@ -58,21 +68,21 @@ add_subdirectory(third_party/stb_image)
 add_subdirectory(01_Getting_started)
 add_subdirectory(02_Lighting)
 # for CTests
-option(ENABLE_TESTS "Enable CTests" ON)
+option(ENABLE_TESTS "Enable CTests" OFF)
 if(ENABLE_TESTS)
     add_subdirectory(tests)
 endif(ENABLE_TESTS)
 
 # ---- library install ----
 install(TARGETS glad # only have glad.lib
-    CONFIGURATIONS Release Debug
+    CONFIGURATIONS Release
     # LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib 
     # RUNTIME DESTINATION bin
 )
 
 install(TARGETS glfw # only have glfw3.lib
-    CONFIGURATIONS Release Debug
+    CONFIGURATIONS Release
     # LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib 
     # RUNTIME DESTINATION bin

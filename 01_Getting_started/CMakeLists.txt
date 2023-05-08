@@ -21,7 +21,7 @@ PRIVATE
 
 # ---- executable install ----
 install(TARGETS 01_Getting_started
-    CONFIGURATIONS Release Debug
+    CONFIGURATIONS Release
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
