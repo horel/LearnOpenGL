@@ -1,6 +1,7 @@
 add_executable( 01_Getting_started
     ${STB_SOURCES}
     src/shader.hpp
+    src/camera.hpp
     src/main.cpp
 )
 
