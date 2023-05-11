@@ -68,13 +68,13 @@ int main(int argc, char **argv) {
 
     // get assets system path
     std::filesystem::path executable_path(argv[0]);
-    std::string colors_vs_path =
+    std::string materials_vs_path =
         executable_path.parent_path().parent_path().generic_string().append(
-            "/assets/02_Lighting/basic_lighting.vs");
+            "/assets/02_Lighting/materials.vs");
     std::string colors_fs_path =
         executable_path.parent_path().parent_path().generic_string().append(
-            "/assets/02_Lighting/basic_lighting.fs");
-    std::cout << colors_vs_path << std::endl;
+            "/assets/02_Lighting/materials.fs");
+    std::cout << materials_vs_path << std::endl;
     std::string light_vs_path =
         executable_path.parent_path().parent_path().generic_string().append(
             "/assets/02_Lighting/light_cube.vs");
@@ -83,7 +83,7 @@ int main(int argc, char **argv) {
             "/assets/02_Lighting/light_cube.fs");
 
     // build and compile our shader program
-    Shader lightingShader(colors_vs_path.c_str(), colors_fs_path.c_str());
+    Shader lightingShader(materials_vs_path.c_str(), colors_fs_path.c_str());
     Shader lightCubeShader(light_vs_path.c_str(), light_fs_path.c_str());
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
@@ -176,10 +176,25 @@ int main(int argc, char **argv) {
 
         // be sure to activate shader when setting uniforms/drawing objects
         lightingShader.use();
-        lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-        lightingShader.setVec3("lightColor",  1.0f, 1.0f, 1.0f);
-        lightingShader.setVec3("lightPos", lightPos);
+        lightingShader.setVec3("light.position", lightPos);
         lightingShader.setVec3("viewPos", camera.Position);
+
+        // light properties
+        glm::vec3 lightColor;
+        lightColor.x = static_cast<float>(sin(glfwGetTime() * 2.0));
+        lightColor.y = static_cast<float>(sin(glfwGetTime() * 0.7));
+        lightColor.z = static_cast<float>(sin(glfwGetTime() * 1.3));
+        glm::vec3 diffuseColor = lightColor   * glm::vec3(0.5f); // decrease the influence
+        glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); // low influence
+        lightingShader.setVec3("light.ambient", ambientColor);
+        lightingShader.setVec3("light.diffuse", diffuseColor);
+        lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+
+        // material properties
+        lightingShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+        lightingShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+        lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f); // specular lighting doesn't have full effect on this object's material
+        lightingShader.setFloat("material.shininess", 32.0f);
 
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
@@ -203,6 +218,8 @@ int main(int argc, char **argv) {
         model = glm::translate(model, lightPos);
         model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
         lightCubeShader.setMat4("model", model);
+        // light cube color
+        lightCubeShader.setVec4("light_cube_color", glm::vec4(lightColor, 1.f));
 
         glBindVertexArray(lightCubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
