@@ -69,6 +69,7 @@ add_subdirectory(third_party/stb_image)
 # for each chapter
 add_subdirectory(01_Getting_started)
 add_subdirectory(02_Lighting)
+add_subdirectory(03_Model_Loading)
 # for CTests
 option(ENABLE_TESTS "Enable CTests" OFF)
 if(ENABLE_TESTS)
