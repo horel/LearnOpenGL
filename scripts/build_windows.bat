@@ -18,7 +18,7 @@ cmake --build .\build --config Release --target "install" -- "-m:12"
 
 
 @REM ------------- for easier to clangd with msvc
-@REM cmake -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -S . -B .cache/build_clangd -G "Unix Makefiles"
+cmake -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -S . -B .cache/build_clangd -G "Unix Makefiles"
 copy .cache\build_clangd\compile_commands.json build
 @REM ------------- ctrl+shift+p > clangd: Restart langue server
 
