@@ -18,6 +18,7 @@ The code repository I used to learn OpenGL.
 - [glad](https://glad.dav1d.de) : OpenGL functions loader.
 - [GLM](https://github.com/g-truc/glm) : OpenGL Mathematics (GLM).
 - [stb](https://github.com/nothings/stb.git) : stb single-file public domain libraries for C/C++.
+- [Assimp](https://github.com/assimp/assimp.git) : The official Open-Asset-Importer-Library Repository.
 
 ## Prerequisites
 To build project, you must first install the following tools.

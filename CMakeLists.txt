@@ -37,12 +37,15 @@ set(LEARN_GL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_INSTALL_PREFIX "${LEARN_GL_ROOT_DIR}/_install")
 set(BINARY_ROOT_DIR "${CMAKE_INSTALL_PREFIX}/")
 # ---- output dir setting ----
-foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
-    string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
-    set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${BINARY_ROOT_DIR}/build-int )
-    set( CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${BINARY_ROOT_DIR}/build-int )
-    set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${BINARY_ROOT_DIR}/build-int )
-endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BINARY_ROOT_DIR}/build-int)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BINARY_ROOT_DIR}/build-int)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BINARY_ROOT_DIR}/build-int)
+foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
+    string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${BINARY_ROOT_DIR}/build-int)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${BINARY_ROOT_DIR}/build-int)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${BINARY_ROOT_DIR}/build-int)
+endforeach(OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES)
 
 
 # ---- find package ----
@@ -56,16 +59,27 @@ endif()
 
 
 # ---- Add subdir ----
-# for glfw3 library
+# for third_party
+add_subdirectory(third_party/glad)
+add_subdirectory(third_party/stb_image)
+# glfw3 library
 # see https://www.glfw.org/docs/latest/build_guide.html#build_link_cmake_source
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "GLFW lib only" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "GLFW lib only" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "GLFW lib only" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "GLFW lib only" FORCE)
-# for third_party
 add_subdirectory(third_party/glfw) # only glfw3.lib
-add_subdirectory(third_party/glad)
-add_subdirectory(third_party/stb_image)
+# assimp library
+set(ASSIMP_BUILD_ASSIMP_TOOLS OFF CACHE BOOL "NO TOOLS" FORCE)
+set(ASSIMP_BUILD_SAMPLES OFF CACHE BOOL "NO SAMPLES" FORCE)
+set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "Assimp build tests" FORCE)
+set(ASSIMP_NO_EXPORT ON CACHE BOOL "NO EXPORT" FORCE)
+set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE BOOL "NO IMPORTERS" FORCE)
+set(ASSIMP_BUILD_OBJ_IMPORTER ON CACHE BOOL "IMPORT OBJ" FORCE)
+set(ASSIMP_BUILD_FBX_IMPORTER ON CACHE BOOL "IMPORT FBX" FORCE)
+set(ASSIMP_INSTALL OFF CACHE BOOL "Assimp install" FORCE) # Not valid under windows
+set(BUILD_SHARED_LIBS ON CACHE BOOL "Set this to OFF to get a static lib" FORCE)
+add_subdirectory(third_party/assimp)
 # for each chapter
 add_subdirectory(01_Getting_started)
 add_subdirectory(02_Lighting)
@@ -78,6 +92,9 @@ endif(ENABLE_TESTS)
 
 
 # ---- library install ----
+# RUNTIME : exe&dll(windows)
+# ARCHIVE : lib
+# LIBRARY : dll
 install(TARGETS glad # only have glad.lib
     CONFIGURATIONS Release
     # LIBRARY DESTINATION lib
@@ -91,5 +108,3 @@ install(TARGETS glfw # only have glfw3.lib
     ARCHIVE DESTINATION lib 
     # RUNTIME DESTINATION bin
 )
-
-
