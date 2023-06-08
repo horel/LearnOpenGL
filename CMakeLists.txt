@@ -108,3 +108,10 @@ install(TARGETS glfw # only have glfw3.lib
     ARCHIVE DESTINATION lib 
     # RUNTIME DESTINATION bin
 )
+
+install(TARGETS assimp # only have assimp.so
+    CONFIGURATIONS Release
+    LIBRARY DESTINATION bin
+    # ARCHIVE DESTINATION lib 
+    # RUNTIME DESTINATION bin
+)
