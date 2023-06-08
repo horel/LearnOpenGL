@@ -22,7 +22,7 @@ constexpr unsigned int SCR_WIDTH = 800;
 constexpr unsigned int SCR_HEIGHT = 600;
 
 // camera
-Camera camera(glm::vec3(0.0f, 10.0f, 20.0f));
+Camera camera(glm::vec3(0.0f, 15.0f, 20.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -30,9 +30,6 @@ bool firstMouse = true;
 // timing
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
-
-// lighting
-constexpr glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 int main(int argc, char **argv) {
 
@@ -77,7 +74,7 @@ int main(int argc, char **argv) {
             "/assets/03_Model_Loading/shader/model_loading.fs");
     std::string model_path =
         executable_path.parent_path().parent_path().generic_string().append(
-            "/assets/03_Model_Loading/nanosuit/nanosuit.obj");
+            "/assets/03_Model_Loading/Elysia/Elysia.pmx");
     std::cout << model_loading_vs_path << std::endl;
 
     // build and compile our shader program

@@ -33,7 +33,7 @@ install(TARGETS 03_Model_Loading
 )
 
 # ---- Assets install ----
-install(DIRECTORY assets/nanosuit assets/picture assets/shader
+install(DIRECTORY assets/picture assets/shader assets/Elysia
     CONFIGURATIONS Release Debug
     DESTINATION assets/03_Model_Loading/
 )
