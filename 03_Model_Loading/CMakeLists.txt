@@ -24,8 +24,9 @@ PRIVATE
     assimp
 )
 
+# $ORIGIN will be replaced as absolute path where shared lib is located
 SET_TARGET_PROPERTIES(03_Model_Loading
-    PROPERTIES INSTALL_RPATH "$ORIGIN;.")
+    PROPERTIES INSTALL_RPATH "$ORIGIN;")
 # ---- executable install ----
 install(TARGETS 03_Model_Loading
     CONFIGURATIONS Release
