@@ -78,8 +78,9 @@ set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE BOOL "NO IMPORTERS" FORCE)
 set(ASSIMP_BUILD_OBJ_IMPORTER ON CACHE BOOL "IMPORT OBJ" FORCE)
 set(ASSIMP_BUILD_MMD_IMPORTER ON CACHE BOOL "IMPORT PMX" FORCE)
 set(ASSIMP_INSTALL OFF CACHE BOOL "Assimp install" FORCE) # Not valid under windows
-set(BUILD_SHARED_LIBS ON CACHE BOOL "Set this to OFF to get a static lib" FORCE)
+set(BUILD_SHARED_LIBS ON)
 add_subdirectory(third_party/assimp)
+set(BUILD_SHARED_LIBS OFF)
 # for each chapter
 add_subdirectory(01_Getting_started)
 add_subdirectory(02_Lighting)

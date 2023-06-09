@@ -35,5 +35,5 @@ install(TARGETS 03_Model_Loading
 # ---- Assets install ----
 install(DIRECTORY assets/picture assets/shader assets/Elysia
     CONFIGURATIONS Release Debug
-    DESTINATION assets/03_Model_Loading/
+    DESTINATION assets/03_Model_Loading
 )
