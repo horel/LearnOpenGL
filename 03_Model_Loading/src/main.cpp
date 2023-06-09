@@ -1,4 +1,5 @@
 #include <filesystem>
+#include <iostream>
 
 #include "glad/glad.h" // IWYU pragma: keep
 #include "GLFW/glfw3.h"
@@ -65,7 +66,7 @@ int main(int argc, char **argv) {
     glEnable(GL_DEPTH_TEST);
 
     // get assets system path
-    std::filesystem::path executable_path(argv[0]);
+    std::filesystem::path executable_path(std::filesystem::canonical(argv[0]));
     std::string model_loading_vs_path =
         executable_path.parent_path().parent_path().generic_string().append(
             "/assets/03_Model_Loading/shader/model_loading.vs");

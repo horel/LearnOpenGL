@@ -58,8 +58,9 @@ endif()
 # find_package(fmt CONFIG REQUIRED)
 
 
-# ---- Add subdir ----
-# for third_party
+# ------ Add subdir ------
+
+# ---- third_party ----
 add_subdirectory(third_party/glad)
 add_subdirectory(third_party/stb_image)
 # glfw3 library
@@ -81,16 +82,6 @@ set(ASSIMP_INSTALL OFF CACHE BOOL "Assimp install" FORCE) # Not valid under wind
 set(BUILD_SHARED_LIBS ON)
 add_subdirectory(third_party/assimp)
 set(BUILD_SHARED_LIBS OFF)
-# for each chapter
-add_subdirectory(01_Getting_started)
-add_subdirectory(02_Lighting)
-add_subdirectory(03_Model_Loading)
-# for CTests
-option(ENABLE_TESTS "Enable CTests" OFF)
-if(ENABLE_TESTS)
-    add_subdirectory(tests)
-endif(ENABLE_TESTS)
-
 
 # ---- library install ----
 # RUNTIME : exe&dll(windows)
@@ -102,17 +93,27 @@ install(TARGETS glad # only have glad.lib
     ARCHIVE DESTINATION lib 
     # RUNTIME DESTINATION bin
 )
-
 install(TARGETS glfw # only have glfw3.lib
     CONFIGURATIONS Release
     # LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib 
     # RUNTIME DESTINATION bin
 )
-
 install(TARGETS assimp # only have assimp.so
     CONFIGURATIONS Release
     LIBRARY DESTINATION bin
     # ARCHIVE DESTINATION lib 
     # RUNTIME DESTINATION bin
 )
+
+# ---- each chapter ----
+add_subdirectory(01_Getting_started)
+add_subdirectory(02_Lighting)
+add_subdirectory(03_Model_Loading)
+# ---- CTests ----
+option(ENABLE_TESTS "Enable CTests" OFF)
+if(ENABLE_TESTS)
+    add_subdirectory(tests)
+endif(ENABLE_TESTS)
+
+

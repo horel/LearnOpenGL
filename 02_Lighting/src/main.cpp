@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
     glEnable(GL_DEPTH_TEST);
 
     // get assets system path
-    std::filesystem::path executable_path(argv[0]);
+    std::filesystem::path executable_path(std::filesystem::canonical(argv[0]));
     std::string multiple_lights_vs_path =
         executable_path.parent_path().parent_path().generic_string().append(
             "/assets/02_Lighting/multiple_lights.vs");
