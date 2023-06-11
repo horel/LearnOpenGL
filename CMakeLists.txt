@@ -110,6 +110,7 @@ install(TARGETS assimp # only have assimp.so
 add_subdirectory(01_Getting_started)
 add_subdirectory(02_Lighting)
 add_subdirectory(03_Model_Loading)
+add_subdirectory(04_Advanced_OpenGL)
 # ---- CTests ----
 option(ENABLE_TESTS "Enable CTests" OFF)
 if(ENABLE_TESTS)
