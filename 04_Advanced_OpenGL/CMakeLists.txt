@@ -1,6 +1,6 @@
 # ---- each chapter ----
 add_subdirectory(01_Depth_Testing)
-# add_subdirectory(02_Stencil_Testing)
+add_subdirectory(02_Stencil_Testing)
 
 # ---- Assets install ----
 file(GLOB assets_04_Advanced_OpenGL assets/*)
